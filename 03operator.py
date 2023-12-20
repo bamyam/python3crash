@@ -48,6 +48,7 @@ print(10>3, 10<=3, 10==3)
 # 논리식의 경우, 수식의 구성에 따라 단축식 평가short-circuit가 가능
 #and(&)는 앞에가 False면은 뒤가 무엇이든 False이므로 앞의 수식만 보고 결과를 판단
 #or(|)는 앞에가 True면은 뒤가 무엇이든 True이므로 이처럼 앞에만 보고 판단하는 것이 short-circuit
+#and, or이 같이 왔을 때 and(&)를 먼저 수행
 
 #and 연산시 첫번째 수식의 결과가 F면 단축식 평가를 적용해서 F
 print((5==3) and (5 > 3)) # 5==3이 false이기 때문에 뒤에가 True더라도 결과는 False임
@@ -93,3 +94,39 @@ print(bool(1), bool('abc'))
 #다음 수식의 결과는?
 print(0 and 'abc', 1 and 'abc') # ?결과가 이해 안됨
 print('' or 'abc', '' and 'abc') # ? 결과가 이해 안됨
+
+#문자열 서식하기formatting하기
+# 문자열 \에서 특정 부분만 바뀌고 나머지는 변화가 없는 경우
+# 문자열 서식화라ㅡㄹ 이용하면 편리하게 작용가능
+print('이름 : 홍길동, 나이 : 25')
+name, age = '홍길동', 25
+print('이름 :', name, ', 나이 :', age)
+
+# % 서식 - 서식문자열 사용
+print('이름 : %s, 나이 : %d' % (name, age))
+
+# .format
+print('이름 : {}, 나이 : {}'.format(name, age))
+
+# f-string
+print(f'이름 : {name}, 나이 : {age}')
+
+number = 1
+
+print('7 X', number, '=', number * 7)
+number = 7
+print('7 X %d = %d' % (number, number * 7))
+print('7 X {} = {}'.format(number, number * 7))
+number = 7
+print(f'{number} X 1 = {number * 1}')
+print(f'{number} X 2 = {number * 2}')
+print(f'{number} X 3 = {number * 3}')
+print(f'{number} X 4 = {number * 4}')
+print(f'{number} X 5 = {number * 5}')
+print(f'{number} X 6 = {number * 6}')
+print(f'{number} X 7 = {number * 7}')
+print(f'{number} X 8 = {number * 8}')
+print(f'{number} X 9 = {number * 9}')
+
+for i in range(1, 10) :
+    print(f'{i} X 7 = {i*7}')
