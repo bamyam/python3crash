@@ -111,3 +111,104 @@ for i in range(len(menus)):
 
 for menu in menus:
     print(menu)
+
+# pass 키워드
+# 반복문 사용시 코드만 작성해 높고 실행문은 나중에 작성하고 싶을 경우
+# pass 라는 키워드를 사용
+for i in range(1, 100):
+    pass # 반복할 내용은 나중에 작성
+
+# 반복수행 시 이터러블 객체가 필요없이 반복만 시킬 경우
+# 변수명 대신 _(언더바)를 사용하기도 함
+for _ in range(5) :
+    print('Hello, World!')
+
+# 중첩반복문
+# 두 개이상의 반복문을 이용해서 반복실행을 할수도 있음
+# 보통 2개의 반복문을 중첩해서 사용하는 경우가 많음
+# 이 경우 바깥쪽 반복문은 행을,
+# 안쪽 반복문은 열을 반복하는데 사용함
+# 총 반복횟수는 (바깥쪽 반복문 횟수) * (안쪽 반복문 횟수)임
+# 관례인데 중첩반복문을 썼을 때 변수는 i, j, k,...순으로 정함
+
+for a in range(1, 4):
+    for b in range(1, 10):
+        print(f'{a} X {b} = {a * b}')
+
+# 모양 출력하기
+for i in range(1, 6):          # 행
+    for j in range(1, 6):      # 열
+        if j <= i:
+            print('*', end='')
+        else :
+            print(' ', end='')
+    print()
+
+# 줄바꿈
+#2단부터 9단까지 구구단 출력하는 반복문 중첩
+for i in range(2, 10): # 세로로 길게 출력
+    for j in range(1, 10):
+        print(f'{i} X {j} = {i * j}')
+    print()
+
+for i in range(2, 10): # 줄바꿈을 추가하였으나, 행과 열이 바뀌어져야 함
+    for j in range(1, 10):
+        print(f'{i} X {j} = {i * j} |' , end = '')
+    print()
+
+for i in range(1, 10): # 자릿수가 일정하지 않아서 삐뚤뺴둘해짐
+    for j in range(2, 10):
+        print(f'{j} X {i} = {i * j} |' , end = '')
+    print()
+
+for i in range(1, 10): # 삐둘해지는 원인인 j와 i가 곱해지는 값이 두자리수이기에
+    for j in range(2, 10):
+        print(f'{j} X {i} = {i * j:2d} |' , end = ' ')
+    print()
+
+# employees.csv를 이용해서 사원정보를 입력하면
+# list에 각각 저장하는 코드를 작성하세요
+# 사번empno, 이름fname, 성lname, 이메일email,
+# 입사일hdate, 직책jobid, 급여sal, 부서번호deptid
+empno = []
+fname = []
+lname = []
+email = []
+hdate = []
+jobid = []
+sal = []
+deptid = []
+
+for i in range(5):
+    print(f'{i+1}번째 사원정보 입력')
+    empno.append(input('empno : '))
+    fname.append(input('fname : '))
+    lname.append(input('lname : '))
+    email.append(input('email : '))
+    hdate.append(input('hdate : '))
+    jobid.append(input('jobid : '))
+    sal.append(input('sal : '))
+    deptid.append(input('deptid : '))
+
+empno.append(input('empno : ').split(sep = '\n'))
+fname.append(input('fname : ').split(sep = '\n'))
+lname.append(input('lname : ').split(sep = '\n'))
+email.append(input('email : ').split(sep = '\n'))
+hdate.append(input('hdate : ').split(sep = '\n'))
+jobid.append(input('jobid : ').split(sep = '\n'))
+sal.append(input('sal : ').split(sep = '\n'))
+deptid.append(input('deptid : ').split(sep = '\n'))
+
+print(empno, fname, lname, email, hdate, jobid, sal, deptid)
+print(empno)
+
+for i in range(10):
+    print(empno[0][i], fname[0][i], lname[0][i], email[0][i], hdate[0][i], jobid[0][i], sal[0][i], deptid[0][i])
+
+empno[0][1]
+
+result = []
+for i in empno :
+    result.extend(i)
+print(result)
+
