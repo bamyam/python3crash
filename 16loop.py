@@ -159,6 +159,32 @@ for i in range(541, 1081):
     elif (i-540) % 25 == 0 and (i-540) % 30 == 0:
         print(f'{i // 60}시 {i % 60}분')
 
+for i in range(541, 1081):
+    if (i-540) % 10 == 0 and (i-540) % 25 == 0 and (i-540) % 30 == 0:
+        print(f'{i // 60:02d}시 {i % 60:02d}분, A-B-C 충돌')
+    elif (i-540) % 10 == 0 and (i-540) % 25 == 0:
+        print(f'{i // 60:02d}시 {i % 60:02d}분, A-B 충돌')
+    elif (i-540) % 10 == 0 and (i-540) % 30 == 0:
+        print(f'{i // 60:02d}시 {i % 60:02d}분, A-C 충돌')
+    elif (i-540) % 25 == 0 and (i-540) % 30 == 0:
+        print(f'{i // 60:02d}시 {i % 60:02d}분, B-C 충돌')
+
+#열차시간_선생님 풀이
+trainA = 10
+trainB = 25
+trainC = 30
+
+for m in range(1, 540+1): # 오전 9시
+    if m % 10 == 0:
+        if m % trainA == 0 and m % trainB == 0:
+            print(f'{9 + m // 60:02d}시 {m % 60:02d}분, A-B') #2d로 하면 빈자리를 안 채우고 자릿수만 확보하지만 02d로 확보시 빈자리를 0으로 채움
+        if m % trainA == 0 and m % trainC == 0:
+            print(f'{9 + m // 60:02d}시 {m % 60:02d}분, A-C')
+        if m % trainB == 0 and m % trainC == 0:
+            print(f'{9 + m // 60:02d}시 {m % 60:02d}분, B-C')
+        if m % trainB == 0 and m % trainC == 0 and m % trainA == 0:
+            print(f'{9 + m // 60:02d}시 {m % 60:02d}분, A-B-C')
+
 # 관리자 로그인 기능
 # 암호입력 -> 암호가 맞는지 확인 -> 암호가 틀렸다면 암호 확인 메시지 출력 -> 5회 이상 실패시 실패초과
 passwd = 'hanbitac'
