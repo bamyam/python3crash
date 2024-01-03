@@ -72,10 +72,14 @@ def show_sungjuk():
 
 def showone_sungjuk():
     print('성적데이터 상세조회')
+    name = input('상세 조회할 학생 이름은?')
+    info = '찾는 데이터가 없습니다'
     for sj in sjs['response']['body']['sungjuks']:
-        row = (f"이름 : {sj['name']}, 국어 : {sj['kor']}, 영어 : {sj['eng']}, 수학 : {sj['mat']}"
-               f"총점 : {sj['tot']}, 평균 : {sj['avg']}, 학점 : {sj['grd']}")
-        print(row)
+        if sj['name'] == name :
+            info = f"이름 : {sj['name']}, 국어 : {sj['kor']}, 영어 : {sj['eng']}, 수학 : {sj['mat']} "\
+                   f"총점 : {sj['tot']}, 평균 : {sj['avg']}, 학점 : {sj['grd']}"
+            break
+    print(info)
 
 
 def modify_sungjuk():
