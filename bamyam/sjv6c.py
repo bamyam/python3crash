@@ -2,8 +2,7 @@ import sys
 from collections import OrderedDict
 import json
 
-# sungjuks = {'response' : {'body' : {'totalCount' : 999, 'items' : []}}}
-sjs = {'sungjuks' : []}
+sjs = {'response' : {'body' : {'totalCount' : 0, 'sungjuks' : []}}}
 
 def load_sungjuk():
     global sjs
@@ -51,7 +50,8 @@ def compute_sungjuk(user):
 
 def save_sungjuk(sj):  # 이제는 파일과 메모리의 sjs변수에 값을 저장
     # 메모리 내에 생성된 json객체에 방금 생성한 성적 데이터 저장
-    sjs['sungjuks'].append(sj)
+    sjs['response']['body']['sungjuks'].append(sj)
+    sjs['response']['body']['totalCount'] += 1
     # 메모리 내에 생성된 json객체를 파일에 저장
     with open('sungjuk.json', 'w', encoding='utf-8') as f:
         json.dump(sjs, f, ensure_ascii=False)
@@ -66,13 +66,13 @@ def add_sungjuk():
 
 def show_sungjuk():
     print('성적데이터 조회')
-    for sj in sjs['sungjuks']:
+    for sj in sjs['response']['body']['sungjuks']:
         print(f"이름 : {sj['name']}, 국어 : {sj['kor']}, 영어 : {sj['eng']}, 수학 : {sj['mat']}")
 
 
 def showone_sungjuk():
     print('성적데이터 상세조회')
-    for sj in sjs['sungjuks']:
+    for sj in sjs['response']['body']['sungjuks']:
         row = (f"이름 : {sj['name']}, 국어 : {sj['kor']}, 영어 : {sj['eng']}, 수학 : {sj['mat']}"
                f"총점 : {sj['tot']}, 평균 : {sj['avg']}, 학점 : {sj['grd']}")
         print(row)
