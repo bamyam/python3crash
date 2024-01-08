@@ -14,7 +14,13 @@
 # 텍스트 컬럼은 자동적으로 CLOB타입으로 설정
 # CLOB가 꼭 필요한 컬럼을 제외하고 varchar타입으로 바꿀 것을 추천
 
+# 2024-01-08기준
+# cx_oracle 모듈이 oracledb로 업그레이드 됨
+# oracle instant client 없이 데이터베이스 관련 작업 가능
+# pip install oracledb
+
 import cx_Oracle
+import oracledb
 
 host = '44.'
 user = ''
@@ -22,8 +28,10 @@ passwd = ''
 sid = 'FREE'
 
 # 디비 서버에 연결
-dsn_tns = cx_Oracle.makedsn(host, 1521, sid)
-conn = cx_Oracle.connect(user, passwd, dsn_tns)
+# dsn_tns = cx_Oracle.makedsn(host, 1521, sid)
+# conn = cx_Oracle.connect(user, passwd, dsn_tns)
+dsn_tns = oracledb.makedsn(host, 1521, sid)
+conn = oracledb.connect(user=user, password=passwd, dsn=dsn_tns)
 
 cursor = conn.cursor()
 
