@@ -111,6 +111,8 @@ def remove_book():
     """
     print('도서데이터 제거')
     bkno = input('삭제할 도서번호는?')
+    rowcnt = BookDAO.delete_book(bkno)
+    print(f'{rowcnt} 건의 도서데이터 삭제됨')
 
 
 # 프로그램 종료
