@@ -1,3 +1,4 @@
+import os.path
 import sys
 from collections import OrderedDict
 import pymysql
@@ -37,18 +38,27 @@ class BookService:
 
     @staticmethod
     def __input_book():
-        bkname = input('도서명 : ')
-        author = input('저자 : ')
-        publisher = input('출판사 : ')
-        pubdate = input('출간일 : ')
-        retail = int(input('정가 : '))
-        pctoff = int(input('할인율 : '))
+        try:
+            bkname = input('도서명 : ')
+            author = input('저자 : ')
+            publisher = input('출판사 : ')
+            pubdate = input('출간일 : ')
+            retail = int(input('정가 : '))
+            pctoff = int(input('할인율 : '))
 
-        bk = Book(bkname, author, publisher, pubdate, retail, pctoff)
-        bk.price = bk.retail * (1-(bk.pctoff/100))
-        bk.mileage = bk.retail * (bk.pctoff/100)
+            bk = Book(bkname, author, publisher, pubdate, retail, pctoff)
+            bk.price = bk.retail * (1-(bk.pctoff/100))
+            bk.mileage = bk.retail * (bk.pctoff/100)
 
-        return bk
+            return bk
+        except:
+            print('BookService - input_book에서 오류 발생')
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print('예외내용 : ', exc_obj)
+            print('예외종류 : ', exc_type.__name__)
+            print('예외위치 : ', fname, exc_tb.tb_lineno)
+
 
     @staticmethod
     def new_book():
@@ -59,11 +69,19 @@ class BookService:
         :return:
         """
         print('도서데이터 추가')
-        bk = BookService.__input_book()
-        print(bk)
+        try:
+            bk = BookService.__input_book()
+            print(bk)
 
-        rowcnt = BookDAO.insert_book(bk)
-        print(f'{rowcnt} 건의 성적 데이터가 추가되었습니다')
+            rowcnt = BookDAO.insert_book(bk)
+            print(f'{rowcnt} 건의 성적 데이터가 추가되었습니다')
+        except:
+            print('BookService - new_book에서 오류 발생')
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+            print('예외내용 : ', exc_obj)
+            print('예외종류 : ', exc_type.__name__)
+            print('예외위치 : ', fname, exc_tb.tb_lineno)
 
     @staticmethod
     def read_book():
