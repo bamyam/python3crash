@@ -27,11 +27,8 @@ class BookDAO:
 
     @staticmethod
     def select_book():
-        sql = 'select bkname, author, publisher, pubdate, price from book ' \
-              ' order by sjno desc'
-
         cursor, conn = dbinfo.openConn()
-        cursor.execute(sql)
+        cursor.execute(selectsql)
         rows = cursor.fetchall()
         dbinfo.closeConn(cursor, conn)
 

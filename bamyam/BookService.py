@@ -27,6 +27,7 @@ def show_menu():
     menu = input("=> 메뉴를 선택하세요 : ")
     return menu
 
+
 # 도서 데이터 추가(입력 -> 처리 -> 저장)
 def input_book():
     bkname = input('도서명 : ')
@@ -52,9 +53,11 @@ def new_book():
     """
     print('도서데이터 추가')
     bk = input_book()
+    print(bk)
 
     rowcnt = BookDAO.insert_book(bk)
     print(f'{rowcnt} 건의 성적 데이터가 추가되었습니다')
+
 
 def read_book():
     """
@@ -63,9 +66,10 @@ def read_book():
     """
     print('모든 도서 데이터 출력')
     rows = BookDAO.select_book()
+    result = ''
     for row in rows:
-        print(f'도서명 : {row[0]:}, 저자 : {row[1]}, 국어 : {row[2]:2d}, 영어')
-    pass
+        result += f'도서번호 : {row[0]}, 도서명 : {row[1]}, 저자 : {row[2]}, 출판사 : {row[3]}, 판매가 : {row[4]:,}\n'
+    print(result)
 
 # 특정 학생의 모든 도서 데이터 출력
 def readone_book():
