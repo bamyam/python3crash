@@ -5,6 +5,12 @@ from bamyam.Book import Book
 from bamyam.BookDAO import BookDAO
 # from 모듈(디렉터리나 파일) import 클래스명(또는 함수명)
 
+# 클래스의 메서드 접근제한자
+# public    : 어느 클래스든지 모두 접근 가능
+# protected : 상속관계에 있는 클래스만 접근 가능(파이썬 지원 X)
+# default   : 같은 패키지 내의 클래스들끼리 접근 가능(파이썬 지원 x)
+# private   : 메서드를 정의한 클래스만 접근 가능(매서드에 __추가)
+
 
 class BookService:
     @staticmethod
@@ -30,7 +36,7 @@ class BookService:
         return menu
 
     @staticmethod
-    def input_book():
+    def __input_book():
         bkname = input('도서명 : ')
         author = input('저자 : ')
         publisher = input('출판사 : ')
@@ -53,7 +59,7 @@ class BookService:
         :return:
         """
         print('도서데이터 추가')
-        bk = BookService.input_book()
+        bk = BookService.__input_book()
         print(bk)
 
         rowcnt = BookDAO.insert_book(bk)
@@ -90,7 +96,7 @@ class BookService:
             print('데이터가 없어요')
 
     @staticmethod
-    def reinput_book(obk):
+    def __reinput_book(obk):
         bkname = input(f'도서명 ({obk[1]}): ')
         author = input(f'저자 ({obk[2]}): ')
         publisher = input(f'출판사 ({obk[3]}): ')
@@ -119,7 +125,7 @@ class BookService:
 
 
         if row:
-            bk = BookService.reinput_book(row)
+            bk = BookService.__reinput_book(row)
             rowcnt = BookDAO.update_book(bk)
             print(f'{rowcnt} 건의 도서데이터 수정됨')
 
