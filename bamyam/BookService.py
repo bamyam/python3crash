@@ -28,6 +28,21 @@ def show_menu():
     return menu
 
 # 도서 데이터 추가(입력 -> 처리 -> 저장)
+def input_book():
+    bkname = input('도서명 : ')
+    author = input('저자 : ')
+    publisher = input('출판사 : ')
+    pubdate = input('출간일 : ')
+    retail = int(input('정가 : '))
+    pctoff = int(input('할인율 : '))
+
+    bk = Book(bkname, author, publisher, pubdate, retail, pctoff)
+    bk.price = bk.retail * (1-(bk.pctoff/100))
+    bk.mileage = bk.retail * (bk.pctoff/100)
+
+    return bk
+
+
 def new_book():
     """
     도서 데이터 추가(입력 -> 처리 -> 저장)\n
@@ -36,17 +51,20 @@ def new_book():
     :return:
     """
     print('도서데이터 추가')
-    pass
+    bk = input_book()
 
-
-# 도서 데이터 저장(book 테이블)
-
+    rowcnt = BookDAO.insert_book(bk)
+    print(f'{rowcnt} 건의 성적 데이터가 추가되었습니다')
 
 def read_book():
     """
-    모든 학생의 일부분의 도서 데이터 출력(번호/도서명/저자/출판사/판매가)
+    모든 책의 일부분의 도서 데이터 출력(번호/도서명/저자/출판사/판매가)
     :return:
     """
+    print('모든 도서 데이터 출력')
+    rows = BookDAO.select_book()
+    for row in rows:
+        print(f'도서명 : {row[0]:}, 저자 : {row[1]}, 국어 : {row[2]:2d}, 영어')
     pass
 
 # 특정 학생의 모든 도서 데이터 출력
