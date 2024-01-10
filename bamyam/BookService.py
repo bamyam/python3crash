@@ -78,8 +78,16 @@ def readone_book():
     :return:
     """
     print('도서데이터 상세조회')
-    bkno = input('상세 조회할 도서명은?')
-    pass
+    bkname = input('상세 조회할 도서명은?')
+
+    row = BookDAO.selectone_book(bkname)
+
+    if row:
+        print(f'도서번호 : {row[0]}, 도서명 : {row[1]}, 저자 : {row[2]}, 출판사 : {row[3]}, 출간일 : {row[4]}\n'
+              f'정가 : {row[5]:,}, 판매가 : {row[6]:,}, 할인율 : {row[7]}%, 마일리지 : {row[8]:,}, 등록일 : {row[9]}')
+    else:
+        print('데이터가 없어요')
+
 
 # 도서 데이터 수정/삭제 시 변경사항을 파일에 반영
 #  도서 데이터 수정
